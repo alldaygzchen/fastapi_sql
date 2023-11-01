@@ -26,7 +26,7 @@ services:
     ports:
       - 6543:5432
     environment:
-      - POSTGRES_PASSWORD=gonzalo0000
+      - POSTGRES_PASSWORD=gxxxx0000
       - POSTGRES_DB=myapi
     volumes:
       - postgres-db:/var/lib/postgresql/data
