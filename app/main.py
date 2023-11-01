@@ -4,12 +4,13 @@ from .database import engine,get_db
 from fastapi.middleware.cors import CORSMiddleware
 from .routers import post,user,auth, vote
 from .config import settings
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
-models.Base.metadata.create_all(bind=engine) #create table
+# models.Base.metadata.create_all(bind=engine) #create table
 
 
 app = FastAPI()
-
+security = HTTPBasic()
 origins = ["*"]
 
 app.add_middleware(
@@ -34,5 +35,7 @@ def root():
 #     posts = db.query(models.Post).all()
 #     return {"data":posts}
 
-
-
+@app.get("/get_ad_username")
+async def get_ad_username(credentials: HTTPBasicCredentials = security):
+    ad_username = credentials.username
+    return {"ad_username": ad_username}
